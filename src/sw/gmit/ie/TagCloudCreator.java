@@ -17,13 +17,23 @@ public class TagCloudCreator {
 		return instance;
 	}
 	
-	public void makeTagCloud() throws Exception {
-		ph = new ParserHandler();
-		ph.clearWordMap();
-		ph.fileParser("test.txt");
+	public void makeTagCloud(String file, String stopWords, boolean isFile) throws Exception {
 		
-		TagCloud tg2 = new TagCloud(width, height);
-		tg2.createTagCloud(ph.getWordsSorted());
+		if(isFile = true){
+			ph = new ParserHandler();
+			ph.clearWordMap();
+			ph.fileParser(file);
+			TagCloud tg2 = new TagCloud(width, height);
+			tg2.createTagCloud(ph.getWordsSorted());
+		}
+		
+		else{
+			ph = new ParserHandler();
+			ph.clearWordMap();
+			ph.urlParser(file);
+			TagCloud tg2 = new TagCloud(width, height);
+			tg2.createTagCloud(ph.getWordsSorted());
+		}
 	}
 
 }

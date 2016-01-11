@@ -34,6 +34,12 @@ public class ParserHandler {
 		sortWords();
 	}
 	
+	public void urlParser(String file) throws Exception {
+		ps = dt.parserType("url", file);
+		populateMap(ps.parse());
+		sortWords();
+	}
+	
 	public void populateMap(String word) {
 		
 		String[] wordList;

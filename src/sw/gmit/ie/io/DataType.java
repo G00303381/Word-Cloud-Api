@@ -9,6 +9,9 @@ public class DataType {
 		else if (dataType.equalsIgnoreCase("file")) {
 			return new FileParser(file);
 		}
+		else if(dataType.equalsIgnoreCase("url")){
+			return new URLParser(file);
+		}
 		return null;
 	}
 }
