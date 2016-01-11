@@ -24,6 +24,7 @@ public class TagCloud {
 	private int xPos;
 	private int yPos;
 	private int direction = 0;
+	private int maxWords;
 	
 	public TagCloud(int width, int height) {
 		
@@ -70,7 +71,7 @@ public class TagCloud {
 				changeDirection();
 			}
 			
-			if(i > 90) {
+			if(i > 30) {
 				break;
 			}
 			i++;

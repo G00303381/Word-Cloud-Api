@@ -8,23 +8,20 @@ public class Runner {
 	
 	public static void main(String[] args) throws Exception {
 		
-		/*parseFile = args[0];
-		stopWords = args[1];
+		TagCloudCreator tg = TagCloudCreator.getInstance();
 		
-		if(args[2].equalsIgnoreCase("false"))
+		parseFile = args[0];
+		
+		if(args[1].equalsIgnoreCase("false"))
 		{
 			isFile = false;
 		}
 		
 		else{
 			isFile = true;
-		}*/
-		isFile = true;
+		}
 		
-		//TagCloudCreator tg = TagCloudCreator.getInstance();
-		//tg.makeTagCloud(parseFile, stopWords, isFile);
-		TagCloudCreator tg = TagCloudCreator.getInstance();
-		tg.makeTagCloud("test.txt", isFile);
+		tg.makeTagCloud(parseFile, isFile);
 	}
 
 }

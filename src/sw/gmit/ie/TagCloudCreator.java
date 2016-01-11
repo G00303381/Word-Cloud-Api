@@ -28,12 +28,17 @@ public class TagCloudCreator {
 			tg2.createTagCloud(ph.getWordsSorted());
 		}
 		
-		else{
+		else if(isFile = false){
 			ph = new ParserHandler();
 			ph.clearWordMap();
 			ph.urlParser(file);
+			ph.sortWords();
 			TagCloud tg2 = new TagCloud(width, height);
 			tg2.createTagCloud(ph.getWordsSorted());
+		}
+		
+		else{
+			System.out.println("Please enter a valid URL or Text File");
 		}
 	}
 

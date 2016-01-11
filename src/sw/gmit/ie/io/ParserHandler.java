@@ -15,7 +15,7 @@ public class ParserHandler {
 	private DataType dt;
 	
 	//Private String to take in the stop words
-	private String swFile = "stopWords.txt";
+	private String swFile = "stopwords.txt";
 	
 	//used to store words read in
 	private Map<String, Integer> wordMap = new HashMap<String, Integer>();
