@@ -3,7 +3,10 @@ package sw.gmit.ie.io;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
-
+/*
+ * URL parser implements Parser
+ * class designed to read in a url and collect the data
+ */
 public class URLParser implements Parser{
 
 	private String file;

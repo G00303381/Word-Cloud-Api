@@ -1,27 +1,25 @@
 package sw.gmit.ie;
 
 import java.awt.*;
-import java.util.Random;
+
+import sw.gmit.ie.colors.RandomColor;
 
 //class used to set the font, color and weight of the word
 public class FontHandler {
 
+	private RandomColor rc;
+	
 	private String word;
 	private int frequency;
-	
 	private int fontSize;
-	private Color color;
 	private Font font;
-	private Font fonts[];
 	
-	private float rValue;
-	private float bValue;
-	private float gValue;
+	private Font fonts[];
 	
 	private GraphicsEnvironment ge;
 	
 	public FontHandler() {
-		super();
+		rc = new RandomColor();
 		ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		fonts = ge.getAllFonts();
 	}
@@ -65,13 +63,8 @@ public class FontHandler {
 		return font;
 	}
 
-
-	public void setColor() {
-		this.color = randColour(rValue, gValue, bValue);
-	}
-
 	public Color getColor() {
-		return color;
+		return rc.getColor();
 	}
 
 	public void setFont(String fontName, int fontWeight, int fontSize) {
@@ -82,27 +75,10 @@ public class FontHandler {
 	{
 		setFont(randomiseFonts(), Font.PLAIN, getFontSize());
 	}
-
-	public GraphicsEnvironment getG2d() {
-		return ge;
-	}
-
-	public void setG2d(GraphicsEnvironment ge) {
-		this.ge = ge;
-	}
 	
 	private String randomiseFonts() {
 		final int index = (int) (Math.random() * ( fonts.length -1 ));
-		return fonts[index].toString();
+		return fonts[index].getFontName();
 	}
-	
-	private Color randColour(float r, float g, float b) {
-		Random rand = new Random();
-		r = rand.nextFloat();
-		g = rand.nextFloat();
-		b = rand.nextFloat();
-		color = new Color(r, g, b);
-		return color;
-	}
-	
+
 }

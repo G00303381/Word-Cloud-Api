@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.TreeSet;
 
-//read in the stop words and place them on a treeset
+//read in the stop words
 public class StopWordsParser implements Parser {
 	
 	private String file;
@@ -17,6 +17,7 @@ public class StopWordsParser implements Parser {
 		this.file = file;
 	}
 	
+	//parse in the stop words and then add to the treeset
 	@Override
 	public String parse() throws Exception {
 		try {
@@ -51,7 +52,6 @@ public class StopWordsParser implements Parser {
 	}
 
 	public int getWordsCount() {
-		// TODO Auto-generated method stub
 		return frequency;
 	}
 	

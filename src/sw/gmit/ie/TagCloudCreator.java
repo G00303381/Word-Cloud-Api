@@ -17,12 +17,13 @@ public class TagCloudCreator {
 		return instance;
 	}
 	
-	public void makeTagCloud(String file, String stopWords, boolean isFile) throws Exception {
+	public void makeTagCloud(String file, boolean isFile) throws Exception {
 		
 		if(isFile = true){
 			ph = new ParserHandler();
 			ph.clearWordMap();
 			ph.fileParser(file);
+			ph.sortWords();
 			TagCloud tg2 = new TagCloud(width, height);
 			tg2.createTagCloud(ph.getWordsSorted());
 		}

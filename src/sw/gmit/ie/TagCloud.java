@@ -15,21 +15,18 @@ import javax.imageio.ImageIO;
 //Tag Cloud generator, needs work, size can be off
 public class TagCloud {
 
-	private Map<String, Integer>map;
 	private CollisionDetector cd;
 	private FontHandler fh;
 	private BufferedImage image;
 	private Graphics2D graphics;
 	private int imageWidth;
 	private int imageHeight;
-	private int wordWidth;
-	private int wordHeight;
-	private int direction;
-	private Color c;
+	private int xPos;
+	private int yPos;
+	private int direction = 0;
 	
 	public TagCloud(int width, int height) {
-
-		this.map = map;
+		
 		cd = new CollisionDetector();
 		fh = new FontHandler();
 		image = new BufferedImage(width, height, BufferedImage.TYPE_4BYTE_ABGR);
@@ -37,33 +34,33 @@ public class TagCloud {
 		
 		this.imageWidth = width;
 		this.imageHeight = height;
-		this.wordWidth = width/2;
-		this.wordHeight = height/2;
+		this.xPos = width/2;
+		this.yPos = height/2;
 	}
 	
+	//draw the word and check for collisions
 	public void drawWord(Font font, Color color, String word, int direction) {
 		
 		Rectangle rect; 
-		fh.setColor();
 		graphics.setColor(color);
 		graphics.setFont(font);
 
-		rect = getStringMargin(graphics, word, wordWidth, wordHeight);
+		rect = getStringMargin(graphics, word, xPos, yPos);
 		
 		while(cd.checkCollision(rect)) {
 			move(direction, rect);
-			rect = getStringMargin(graphics, word, wordWidth, wordHeight);			
+			rect = getStringMargin(graphics, word, xPos, yPos);			
 		}
 		cd.addCollisionMargin(rect);
 		
-		graphics.drawString(word, wordWidth, wordHeight);
+		graphics.drawString(word, xPos, yPos);
 	}
 	
-	public void createTagCloud(Map<String, Integer> map2) throws Exception {
+	//create the tagCloud
+	public void createTagCloud(Map<String, Integer> words) throws Exception {
 		int i = 0;
-		direction = 0;
 		
-		for(Map.Entry<String, Integer> word : map2.entrySet()) {
+		for(Map.Entry<String, Integer> word : words.entrySet()) {			
 			fh.setFontSize(word.getValue());
 			fh.setFont();
 			
@@ -78,35 +75,38 @@ public class TagCloud {
 			}
 			i++;
 		}
-		
 		finishedTagCloud();
 	}
 	
+	//method used to move the words
 	private void move(int direction, Rectangle2D rect) {
 		switch (direction) {
 		case 0:
 			if (!(rect.getY() < 0)) {
-				wordHeight--;
+				yPos--;
+			}
+			else{
+				resetPos();
 			}
 			break;
 			
 		case 1:
 			if(!(rect.getX() + rect.getWidth() > imageWidth))		
-				wordWidth++;				
+				xPos++;				
 			else
 				resetPos();
 			break;
 			
 		case 2:
 			if(!(rect.getY() + rect.getHeight() > imageHeight))		
-				wordHeight++;				
+				yPos++;				
 			else
 				resetPos();
 			break;
 			
 		case 3:
 			if(!(rect.getX() < 0))				
-				wordWidth--;				
+				xPos--;				
 			else
 				resetPos();
 			break;
@@ -132,13 +132,13 @@ public class TagCloud {
 	}
 	
 	private void resetPos() {
-		wordWidth = imageWidth/2;
-		wordHeight = imageHeight/2;
+		xPos = imageWidth/2;
+		yPos = imageHeight/2;
 		changeDirection();
 	}
 
+	//finalise the tag cloud
 	public void finishedTagCloud() throws Exception {
-		System.out.println("Reached");
 		graphics.dispose();
 		ImageIO.write(image, "png", new File("tagCloud.png"));
 		System.out.println("Word Cloud Generated");

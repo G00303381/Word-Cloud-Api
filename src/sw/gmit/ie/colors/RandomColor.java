@@ -1,32 +1,25 @@
 package sw.gmit.ie.colors;
 
 import java.awt.Color;
-import java.util.Random;
-
+/*
+ * Random Color Generator class
+ * Class implements CoulorProvider
+ * Class is used to return a Color 
+ */
 public class RandomColor implements ColourProvider {
 	
-	private Color color;
-	private float rValue;
-	private float gValue;
-	private float bValue;
+	private Color color;	
 	
 	@Override
-	public void setColor() {
-		this.color = randColour(rValue, gValue, bValue);
-	}
-
-	@Override
 	public Color getColor() {
-		// TODO Auto-generated method stub
+		randColour();
 		return color;
 	}
 	
-	private Color randColour(float r, float g, float b) {
-		Random rand = new Random();
-		r = rand.nextFloat();
-		g = rand.nextFloat();
-		b = rand.nextFloat();
-		
+	private Color randColour() {
+		int r = (int) (Math.random() * 255);
+		int b = (int) (Math.random() * 255);
+		int g = (int) (Math.random() * 255);
 		color = new Color(r, g, b);
 		//System.out.println(r + g + b);
 		return color;

@@ -2,6 +2,9 @@ package sw.gmit.ie.io;
 
 import java.io.*;
 
+/*
+ * Class designed to read in text files
+ */
 public class FileParser implements Parser{
 
 	private String file;
